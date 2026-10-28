@@ -206,6 +206,7 @@ body::before{background:var(--fundo)}
 .lista-info{max-width:560px;margin:0 auto 8px;display:flex;justify-content:space-between;align-items:center;font-size:16px;font-weight:900;color:var(--rosa)}
 .lista-info button{font:inherit;font-size:14px;font-weight:800;background:none;border:0;color:var(--tinta-2);text-decoration:underline;padding:4px;cursor:pointer}
 
+#mandar{white-space:nowrap;font-size:clamp(14px,4.3vw,17px);padding-inline:12px}
 .subir{bottom:calc(122px + env(safe-area-inset-bottom,0px))}
 </style>
 <header class="topo g" id="topo"><div class="miolo">
@@ -446,7 +447,7 @@ function verBarra(){
   const txt = n ? "Oi! Gostei destas peças do catálogo:\n" + lista.map((x, k) => `${k + 1}) ${x.nome}, ${x.qual}\n${SITE}#${x.id}`).join("\n") + "\nQuero saber as cores e os tamanhos."
     : "Oi! Vi o catálogo e quero fazer um pedido.";
   a.href = "https://wa.me/5551980640448?text=" + encodeURIComponent(txt);
-  a.textContent = n ? "💬 Mandar para a Gabelinha" : "💬 Fazer meu pedido";
+  a.textContent = n ? "💬 Enviar o que gostei para a Gabelinha" : "💬 Fazer meu pedido";
   a.classList.toggle("cheio", !!n);
 }
 const verTudo = () => { document.querySelectorAll(".gostei").forEach(verGostei); verBarra(); };
@@ -455,7 +456,7 @@ vitrine.addEventListener("click", e => {
   const x = chaveDe(bt), k = lista.findIndex(y => y.chave === x.chave);
   const msg = bt.parentElement.querySelector(".msg");
   if (k >= 0) { lista.splice(k, 1); msg.textContent = ""; }
-  else { lista.push(x); msg.textContent = "Guardei! Continue olhando. No fim, toque em “Mandar para a Gabelinha” lá embaixo."; }
+  else { lista.push(x); msg.textContent = "Guardei! Continue olhando. No fim, toque em “Enviar o que gostei” lá embaixo."; }
   guardar(); verTudo();
 });
 document.getElementById("lista-limpar").addEventListener("click", () => {
