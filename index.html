@@ -1,15 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Catálogo Gabelinha Kids</title>
-<meta name="description" content="Roupa infantil no atacado em Alvorada/RS. 20% OFF a partir de 6 peças, 3x sem juros e sem mínimo.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Catálogo Gabelinha Kids">
-<meta property="og:description" content="Roupa infantil no atacado. 20% OFF a partir de 6 peças, 3x sem juros.">
-<meta property="og:url" content="https://gabelinhakids.com.br/">
-<meta property="og:image" content="https://gabelinhakids.com.br/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#141114">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800;900&display=swap">
 <style id="estilo">
 /* Layout: vitrine escura estilo app de moda. Fundo grafite, fotos de ponta a ponta, preço em verde neon, botões lado a lado */
@@ -174,11 +164,45 @@ footer b{color:var(--tinta)}
 .grupo>h2::before{content:"";width:8px;align-self:stretch;min-height:36px;border-radius:4px;background:var(--c);flex:none}
 .grupo>h2::after{content:"";flex:1;min-width:24px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--c),transparent)}
 nav a{font-family:"Bebas Neue",var(--f);font-weight:400;font-size:20px!important;letter-spacing:.03em!important;text-transform:uppercase;letter-spacing:.03em;font-size:15px;text-wrap:balance;display:flex;align-items:center;justify-content:center;min-height:52px}
+/* Tema claro */
+:root{--fundo:#FAF7F2;--cartao:#FFFFFF;--linha:#E4DFE3;--tinta:#1B1720;--tinta-2:#5C5560;--neon:#0B9A50;color-scheme:light}
+.grupo>h2{color:var(--tinta)}
+.sub.rosa h3,.sub.azul h3{color:var(--tinta)}
+.sub{box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 14%,transparent),0 6px 18px rgba(30,20,30,.08)}
+.preco i{color:#fff}
+.btn.share{background:#1B1720;color:#fff}
+.barra{background:color-mix(in srgb,var(--fundo) 92%,transparent);border-top:1px solid var(--linha)}
+.barra a{color:#fff}
+.ed-salvar{color:#fff}
+.subir{background:#1B1720;color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.revende{background:color-mix(in srgb,var(--amarelo) 12%,var(--cartao))}
+.sub-cab .preco i{color:#39FF88}
+body::before{background:var(--fundo)}
+.oferta20{margin-top:14px;display:flex;align-items:center;gap:12px;background:var(--neon);color:#fff;border-radius:16px;padding:12px 16px;font-size:17px;font-weight:800;line-height:1.25}
+.oferta20 b{font-family:"Bebas Neue",var(--f);font-weight:400;font-size:40px;line-height:.9;letter-spacing:.02em;flex:none}
+/* Cartões mais leves: cor só como detalhe, preço grande */
+.grupo{gap:16px;padding-top:30px}
+.sub{border:1px solid var(--linha);border-top:6px solid var(--c);border-radius:18px;padding:0 10px 14px;gap:12px;box-shadow:0 4px 16px rgba(40,30,20,.07)}
+.sub-cab{margin:0 -10px;padding:14px 14px 12px!important;background:var(--cartao);border-bottom:1px solid var(--linha)!important;color:var(--tinta)}
+.sub-cab h3,.sub-cab .preco b{color:var(--tinta)!important}
+.sub-cab h3{font-size:19px}
+.sub-cab .linha{align-items:flex-end}
+.sub-cab .tag{color:var(--tinta)!important;background:color-mix(in srgb,var(--c) 22%,#fff);border-radius:999px;padding:5px 12px;font-size:15px}
+.sub-cab .preco b{font-size:30px;line-height:1.05}
+.sub-cab .preco span{background:none;padding:0;color:var(--neon);font-size:22px;margin-top:2px}
+.sub-cab .preco i{background:var(--neon);color:#fff;font-size:13px;padding:2px 7px}
+.rotulo{display:none!important}
+.midia{gap:16px}
+.vazio{display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;font-size:13px;background:none;border:1px dashed var(--linha);border-radius:10px}
+.vazio span{font-size:15px}
+.voltar{font-size:14px;padding-top:0}
+.divisor{margin:2px 0}
 </style>
 <header class="topo g" id="topo"><div class="miolo">
   <div class="marca">Gabelinha Kids · Atacado</div>
   <div class="titulo"><img class="boneca" src="midia/4f103287f37e8aac3c042be2a14f2d0a.png" alt="" width="64" height="64"><h1>Catálogo</h1></div>
   <div class="data" id="data">Atualizado hoje</div>
+  <div class="oferta20"><b>20% OFF</b><span>comprando a partir de 6 itens (sortidos)</span></div>
 </div></header>
 <div class="g" id="corpo"><div class="miolo">
   <div class="folha">
@@ -418,7 +442,7 @@ const RESET = ':root{color-scheme:light;box-sizing:border-box;padding-top:env(sa
 function paginaCompleta(){
   const json = JSON.stringify(DADOS).replace(/</g, "\\u003c");
   return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>' + RESET + '</style></head><body>\n' + [
-    '<title>Catálogo Gabelinha Kids · escuro</title>',
+    '<title>Catálogo Gabelinha Kids</title>',
     '<meta name="claude:viewport-fit-sides" content="cover">',
     '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800;900&display=swap">',
     MOLDE.estilo, MOLDE.topo, MOLDE.corpo, MOLDE.tela, MOLDE.barra,
