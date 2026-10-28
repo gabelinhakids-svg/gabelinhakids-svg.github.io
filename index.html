@@ -72,6 +72,8 @@ nav a:focus-visible,.btn:focus-visible{outline:3px solid var(--neon);outline-off
 .midia{display:grid;gap:22px}
 .item{display:grid;gap:10px}
 .item img,.item video{width:100%;height:auto;max-width:100%;display:block;border-radius:14px;background:#000}
+/* Espaço da foto reservado antes de carregar: assim a página não pula quando a pessoa toca numa categoria. */
+.item>img,.trilho img{aspect-ratio:3/4;height:auto;object-fit:contain;background:#fff}
 .item video{aspect-ratio:9/16;height:auto;width:100%;object-fit:contain;background:#000}
 .vid{gap:10px}
 .mini{font:inherit;position:relative;justify-self:center;padding:0;border:0;background:#000;border-radius:16px;overflow:hidden;cursor:pointer;aspect-ratio:3/4;width:min(70%,260px)}
@@ -389,7 +391,27 @@ desenhar();
 const subir = document.getElementById("subir");
 const verSubir = () => { subir.hidden = scrollY < document.getElementById("chips").getBoundingClientRect().bottom + scrollY; };
 addEventListener("scroll", verSubir, {passive: true}); verSubir();
-subir.addEventListener("click", () => document.getElementById("chips").scrollIntoView({behavior: "smooth", block: "start"}));
+subir.addEventListener("click", () => irPara(document.getElementById("chips")));
+
+// Toque numa categoria: vai direto e continua acertando a posição enquanto fotos e vídeos carregam.
+let fixar = null;
+function irPara(alvo){
+  if (!alvo) return;
+  clearInterval(fixar);
+  const acertar = () => {
+    const y = alvo.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(alvo).scrollMarginTop) || 0);
+    if (Math.abs(scrollY - y) > 2) scrollTo({top: y, behavior: "instant"});
+  };
+  acertar();
+  let n = 0; fixar = setInterval(() => { acertar(); if (++n > 40) clearInterval(fixar); }, 100);
+}
+["touchstart", "wheel", "keydown"].forEach(ev => addEventListener(ev, e => { if (!e.target.closest?.('a[href^="#"], #subir')) clearInterval(fixar); }, {passive: true}));
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#"]'); if (!a) return;
+  const alvo = document.getElementById(decodeURIComponent(a.getAttribute("href").slice(1)));
+  if (!alvo) return;
+  e.preventDefault(); irPara(alvo);
+});
 
 // ---------- Modo edição: só aparece para quem pode editar o link (a dona). As clientes nunca veem. ----------
 const RESET = ':root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}';
