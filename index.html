@@ -250,7 +250,7 @@ function ordenados(){
 
 function botoes(c, tipo, src){
   const msg = encodeURIComponent(`Oi! Vi no catálogo e quero comprar:\n${c.nome} · ${tamTxt(c)}${c.preco ? " · " + real(c.preco) : ""}\n(${tipo === "video" ? "vídeo" : "foto"} da categoria)\nTamanho que preciso: `);
-  return `<div class="acoes"><a class="btn comprar" href="https://wa.me/5551980640448?text=${msg}" target="_blank" rel="noopener">${ICON_WA}Comprar</a>
+  return `<div class="acoes"><a class="btn comprar" href="https://wa.me/5551980640448?text=${msg}" target="_blank" rel="noopener">${ICON_WA}Consultar</a>
     <button type="button" class="btn share" data-foto="${esc(src)}" data-tipo="${tipo}">${ICON_SHARE}Compartilhar sem valor</button>
     <div class="nota"><b>Vai sem preço.</b> Escolha WhatsApp, Instagram, Facebook ou salvar.</div>
     <div class="msg" role="status"></div></div>`;
