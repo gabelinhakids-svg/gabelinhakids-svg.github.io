@@ -197,6 +197,17 @@ body::before{background:var(--fundo)}
 .vazio span{font-size:15px}
 .voltar{font-size:14px;padding-top:0}
 .divisor{margin:2px 0}
+/* Gostei + lista */
+.btn.gostei{background:#fff;color:var(--rosa);border:2px solid var(--rosa)}
+.btn.gostei svg{width:24px;height:24px}
+.btn.gostei[aria-pressed="true"]{background:var(--rosa);color:#fff}
+.btn.gostei[aria-pressed="true"] svg{fill:currentColor}
+.acoes .msg:not(:empty){font-size:15px;font-weight:900;color:var(--neon);text-align:center}
+.lista-info{max-width:560px;margin:0 auto 8px;display:flex;justify-content:space-between;align-items:center;font-size:16px;font-weight:900;color:var(--rosa)}
+.lista-info button{font:inherit;font-size:14px;font-weight:800;background:none;border:0;color:var(--tinta-2);text-decoration:underline;padding:4px;cursor:pointer}
+
+#mandar{white-space:nowrap;font-size:clamp(14px,4.3vw,17px);padding-inline:12px}
+.subir{bottom:calc(122px + env(safe-area-inset-bottom,0px))}
 </style>
 <header class="topo g" id="topo"><div class="miolo">
   <div class="marca">Gabelinha Kids · Atacado</div>
@@ -237,7 +248,7 @@ body::before{background:var(--fundo)}
   </footer>
 </div></div>
 <div class="tela" id="tela" hidden=""><button type="button" class="fechar" id="fechar">✕ Fechar</button><video id="player" controls="" playsinline=""></video></div>
-<div class="barra" id="barra"><a class="btn" href="https://wa.me/5551980640448?text=Oi!%20Vi%20o%20cat%C3%A1logo%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener">💬 Fazer meu pedido</a><button type="button" class="subir" id="subir" aria-label="Voltar para as categorias" hidden>⬆</button></div>
+<div class="barra" id="barra"><div class="lista-info" id="lista-info" hidden><span id="lista-n"></span><button type="button" id="lista-limpar">Limpar</button></div><a class="btn" id="mandar" href="https://wa.me/5551980640448?text=Oi!%20Vi%20o%20cat%C3%A1logo%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener">💬 Fazer meu pedido</a><button type="button" class="subir" id="subir" aria-label="Voltar para as categorias" hidden>⬆</button></div>
 <script type="application/json" id="dados">{"atualizado":"2026-10-27","grupos":[{"nome":"Conjuntos","cats":[{"id":"conj-menino","nome":"Conjuntos menino","tam":"0 ao 8","preco":29.9,"cor":"azul","fotos":["midia/7be2eb71fdddbb130de4c9b1a55764f0.jpg","midia/ee70a622169e23a9593375602b8275fd.jpg","midia/791a2e100f0d533cb02931d001a6e707.jpg","midia/2b7c24a491acbe314c376e43063fc2c0.jpg","midia/d863c01e8369fac718d9a7fad598d756.jpg","midia/be68affac635dc39c67c005e812afccd.jpg","midia/cd8fce1d3ac74163c84a9eb5fca738fe.jpg","midia/0eab9344aef4179e7abdd7c2988167e5.jpg"],"video":"midia/75d2a439a0c8adcb05d907fcdbac95e7.mp4","capa":null},{"id":"conj-menino-g","nome":"Conjuntos menino","tam":"10 ao 16","preco":39.9,"cor":"azul","fotos":["midia/5dda7091972ed613a773b21455e1be7a.jpg","midia/6bb7e07c938f9d76facec64b0375fc96.jpg","midia/4cb2847b4299c1b18ae12bace8380e61.jpg","midia/a7864cebc9057e0ca1b58347803236fa.jpg"],"video":"midia/6b5ec52892fd45d78f1e89d6b18d75a3.mp4","capa":null},{"id":"conj-menina","nome":"Conjuntos menina","tam":"0 ao 8","preco":29.9,"cor":"rosa","fotos":["midia/281ede15f7715c621be46017f97b7f0a.jpg","midia/f3677c0b78ee6125c4eeb6a637972717.jpg","midia/26058425c89f278916501ef7e6390f8b.jpg"],"video":"midia/398943e511bba0305a8995f89807f43b.mp4","capa":null},{"id":"conj-menina-g","nome":"Conjuntos menina","tam":"10 ao 16","preco":39.9,"cor":"rosa","fotos":["midia/fe50b7ae277bdbd2fe035b9c83c42298.jpg","midia/b1675d0f95d5f3c8bfeec9ca7e255218.jpg","midia/7718c59d6d172a59a7b229566bff53ee.jpg","midia/e357ba4b85590c17436c42dd8f8d4a7c.jpg","midia/f43011b4aadab4fdedb45785a45a6bf6.jpg"],"video":"midia/691829aa7eb799219036d0f05fa4d9b2.mp4","capa":null},{"id":"conj-juvenil","nome":"Conjunto juvenil menino","tam":"14 e 16","preco":59.9,"cor":"azul","fotos":["midia/7b744bd063527946994393a82c9b1d92.jpg","midia/64e640694d0aa33c9d1546750d313e4f.jpg"],"video":"midia/e8647ec8553cd89dd72a6edf5c0b877f.mp4","capa":null},{"id":"conj-futebol","nome":"Conjunto futebol","tam":"2 ao 14","preco":39.9,"cor":"azul","fotos":["midia/476241818870a09041824f520038ae4c.jpg","midia/fcf96c470c837bf8d741989ac811aab4.jpg","midia/54d813d106dad2559166288e7e7ee4aa.jpg"],"video":"midia/4daf2664e902b1d6e7861a592aa384a0.mp4","capa":null},{"id":"premium","nome":"Linha premium menina Tilesul","tam":"4, 6 e 8","preco":49.9,"cor":"rosa","fotos":["midia/fd9609ad850fba5bcd24ab6ec37342c9.jpg"],"video":"midia/ab717e04b25c0a7e56fea75b1c50f8cd.mp4","capa":null}]},{"nome":"Vestidos","cats":[{"id":"vestidos-0-8","nome":"Vestidos","tam":"0 ao 8","preco":29.9,"cor":"rosa","fotos":["midia/2c6112627551ee0a4dcdd437983b16df.jpg","midia/48d2ac387d05dff8f36ae451d1124b82.jpg","midia/b18456ca574efc269b094c6dbed95fd4.jpg","midia/b8d1ae7cf90c6d460223ac50748de727.jpg"],"video":"midia/cd6b91dd13c0d81335844f9f6a6fceb7.mp4","capa":null},{"id":"vestidos-10-16","nome":"Vestidos","tam":"10 ao 16","preco":39.9,"cor":"rosa","fotos":["midia/85b44302eb3f98780b49c4ffc8e5b2a6.jpg"],"video":"midia/f052e1c8fa41845c9aa8274edae6e20e.mp4","capa":null}]},{"nome":"Blusas","cats":[{"id":"blusas","nome":"Blusas menina","tam":"0 ao 16","preco":14.9,"cor":"rosa","fotos":["midia/8a5b07685b668526f4b53ee6cfc257ab.jpg","midia/8965e6399942969e21b8394da3368285.jpg"],"video":"midia/a1f771e4268e6a1ccba9cac65e860c6e.mp4","capa":null}]},{"nome":"Shorts e leggings","cats":[{"id":"shorts","nome":"Shorts menina sortidos","tam":"2 ao 16","preco":14.9,"cor":"rosa","fotos":["midia/665029a1bdb400218268534613ce7a27.jpg"],"video":"midia/e4ee6767aa1822bc9e7d7e0013551613.mp4","capa":null},{"id":"leggings","nome":"Leggings menina","tam":"1 ao 14","preco":19.9,"cor":"rosa","fotos":["midia/63f488201c99521c0c45beaae642d006.jpg","midia/58ade41b23a8d1ce60167ea7edd0a59c.jpg"],"video":"midia/93e649660ce2ef2a5fef8a547ebe544e.mp4","capa":null}]},{"nome":"Camisetas","cats":[{"id":"cam-variadas","nome":"Camisetas variadas","tam":"0 ao 16","preco":14.9,"cor":"azul","fotos":["midia/0b8feb22da1a30fef8a206e879e8db2e.jpg"],"video":"midia/02dafd617b3880441248e391214e00a5.mp4","capa":null},{"id":"cam-bordadas","nome":"Camisetas bordadas","tam":"8 ao 16","preco":19.9,"cor":"azul","fotos":["midia/027f1d553e8573e7cf8478f38ccbc7b3.jpg","midia/d415e968d0504da2f116b9ba18fb01b3.jpg"],"video":"midia/3cf9dfebc531ef83a3bf6e6f8482d7ba.mp4","capa":null},{"id":"cam-luzes","nome":"Camisetas pisca-luzes Disney e Marvel","tam":"4 ao 12","preco":39.9,"cor":"amarelo","fotos":["midia/1f9c601e2dd39f68f86c833bdd73842f.jpg","midia/840019fb414e90075db710a182bdc2d6.jpg","midia/01278bc877c5e1591f522584209e0cd7.jpg","midia/74e31edc79db87e40e706e2046855e73.jpg","midia/63da4a8d8f9c0c256a9809ce2bf5eb14.jpg","midia/6ce0fe6d9e1bbdb97ec7ceaa0da74640.jpg","midia/076d6725f05b45d2129f25157cfdd43f.jpg"],"video":"midia/e049d43b9c43aea3ba1f588e7e4af620.mp4","capa":null}]},{"nome":"Pijamas","cats":[{"id":"pijamas","nome":"Pijamas que brilham no escuro","tam":"3 ao 10 · meninos e meninas","preco":19.9,"cor":"amarelo","fotos":["midia/94438e07fc1c8d4ef1d3011b804904e5.jpg","midia/579a61d109aa9f16d1a5d1a5cc634e3a.jpg"],"video":"midia/49370e414b1a324481a22763724d31ae.mp4","capa":null}]},{"nome":"Cuecas","cats":[{"id":"cuecas","nome":"Cuecas infantis","tam":"G e GG","preco":9.9,"cor":"azul","fotos":["midia/2943da434aa1aa37b8c09b9e3e53885a.jpg"],"video":"midia/11ec093be4f9dec3c37ececc1bd18c9e.mp4","capa":null}]},{"nome":"Tênis","cats":[{"id":"tenis","nome":"Tênis","tam":"26 ao 33","preco":69.9,"cor":"amarelo","fotos":["midia/92e72d5d2cec8f0d1cc4284625952087.jpg"],"video":"midia/5d3eaa85f067aaaeb2502d86575f8e54.mp4","capa":null}]},{"nome":"Linha baby","cats":[{"id":"baby","nome":"Linha baby","tam":"0 a 1 ano","preco":49.9,"cor":"amarelo","fotos":["midia/52d0ad7a1ac412bd0fe332e6c37ff999.jpg"],"video":"midia/b148b433f00e6e55e736c7c7304e27da.mp4","capa":null}]},{"nome":"Camisetas adultas","cats":[{"id":"adulto-futebol","nome":"Camisetas adultas de futebol","tam":"P ao GG","preco":69.9,"cor":"azul","fotos":["midia/1653a89261db26509ec07dd62db09f67.jpg","midia/e5176d4e341085b48eb347836a5c604e.jpg","midia/f4851f96f871ede121cbda6ee9a113e1.jpg"],"video":null,"capa":null}]}]}</script>
 <script id="app">
 // O catálogo inteiro vem do bloco "dados": categorias, peças, preços, fotos e vídeos.
@@ -255,6 +266,7 @@ const MOLDE = {
 };
 
 const ICON_WA = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.2-.2-.4-.3z"/></svg>';
+const ICON_CORACAO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.3 7.8 3.6 4 7.2 4c2.1 0 3.6 1.2 4.8 2.8C13.2 5.2 14.7 4 16.8 4c3.6 0 5.9 3.8 4.5 7.3-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg>';
 const ICON_SHARE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>';
 const real = v => "R$ " + v.toFixed(2).replace(".", ",");
 const off = v => Math.round(v * 80) / 100;
@@ -273,8 +285,7 @@ function ordenados(){
 }
 
 function botoes(c, tipo, src){
-  const msg = encodeURIComponent(`Oi! Vi no catálogo e quero comprar:\n${c.nome} · ${tamTxt(c)}${c.preco ? " · " + real(c.preco) : ""}\n(${tipo === "video" ? "vídeo" : "foto"} da categoria)\nTamanho que preciso: `);
-  return `<div class="acoes"><a class="btn comprar" href="https://wa.me/5551980640448?text=${msg}" target="_blank" rel="noopener">${ICON_WA}Consultar</a>
+  return `<div class="acoes"><button type="button" class="btn gostei" data-cat="${esc(c.id)}" data-tipo="${tipo}" aria-pressed="false">${ICON_CORACAO}<span>Gostei</span></button>
     <button type="button" class="btn share" data-foto="${esc(src)}" data-tipo="${tipo}">${ICON_SHARE}Compartilhar sem valor</button>
     <div class="nota"><b>Vai sem preço.</b> Escolha WhatsApp, Instagram, Facebook ou salvar.</div>
     <div class="msg" role="status"></div></div>`;
@@ -322,6 +333,7 @@ function editor(c){
 
 function desenhar(){
   const lista = ordenados();
+  setTimeout(() => typeof verTudo === "function" && verTudo());
   document.getElementById("chips").innerHTML = '<div class="passo">Toque na categoria ou role para baixo para ver tudo</div>' +
     lista.filter(x => x.cats.length || editando).map(x => `<a href="#${slug(x.g.nome)}">${esc(x.g.nome)}</a>`).join("");
   // Cor da faixa do título: menina e menino juntos fica amarelo; senão a cor que mais aparece.
@@ -364,8 +376,7 @@ function fotoAtual(car){
   car.querySelector(".cont").textContent = `${i + 1} de ${n}`;
   item.querySelectorAll(".pontos i").forEach((p, k) => p.classList.toggle("on", k === i));
   item.querySelector(".share").dataset.foto = t.children[i].getAttribute("src");
-  const a = item.querySelector(".comprar");
-  a.href = a.href.replace(/\(foto%20[^)]*\)/, `(foto%20${i + 1}%20de%20${n})`);
+  verGostei(item.querySelector(".gostei"));
 }
 
 const vitrine = document.getElementById("vitrine");
@@ -409,7 +420,53 @@ document.getElementById("fechar").addEventListener("click", fecharTela);
 tela.addEventListener("click", e => { if (e.target === tela) fecharTela(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !tela.hidden) fecharTela(); });
 
+// "Gostei": a cliente vai marcando as peças (cada foto ou vídeo) e no fim manda tudo numa mensagem só para a Gabelinha.
+// Sem valor total e sem carrinho: a cor e o tamanho a Gabelinha combina no WhatsApp. A lista fica guardada no celular.
+const SITE = "https://gabelinhakids.com.br/";
+let lista = [];
+try { lista = JSON.parse(localStorage.getItem("gostei") || "[]"); } catch (e) {}
+const guardar = () => { try { localStorage.setItem("gostei", JSON.stringify(lista)); } catch (e) {} };
+function chaveDe(bt){
+  const item = bt.closest(".item"), c = DADOS.grupos.flatMap(g => g.cats).find(x => x.id === bt.dataset.cat);
+  const src = item.querySelector(".share").dataset.foto;
+  const fotos = (c && c.fotos) || [];
+  const video = bt.dataset.tipo === "video";
+  return {chave: bt.dataset.cat + "|" + src, id: bt.dataset.cat, nome: c ? c.nome : "",
+    qual: video ? "vídeo" : fotos.length > 1 ? `foto ${fotos.indexOf(src) + 1} de ${fotos.length}` : "foto"};
+}
+function verGostei(bt){
+  if (!bt) return;
+  const sim = lista.some(x => x.chave === chaveDe(bt).chave);
+  bt.setAttribute("aria-pressed", sim);
+  bt.querySelector("span").textContent = sim ? "Gostei ✓" : "Gostei";
+}
+function verBarra(){
+  const n = lista.length, a = document.getElementById("mandar");
+  document.getElementById("lista-info").hidden = !n;
+  document.getElementById("lista-n").textContent = n === 1 ? "♥ Peças que gostei (1)" : `♥ Peças que gostei (${n})`;
+  const txt = n ? "Oi! Gostei destas peças do catálogo:\n" + lista.map((x, k) => `${k + 1}) ${x.nome}, ${x.qual}\n${SITE}#${x.id}`).join("\n") + "\nQuero saber as cores e os tamanhos."
+    : "Oi! Vi o catálogo e quero fazer um pedido.";
+  a.href = "https://wa.me/5551980640448?text=" + encodeURIComponent(txt);
+  a.textContent = n ? "💬 Enviar o que gostei para a Gabelinha" : "💬 Fazer meu pedido";
+  a.classList.toggle("cheio", !!n);
+}
+const verTudo = () => { document.querySelectorAll(".gostei").forEach(verGostei); verBarra(); };
+vitrine.addEventListener("click", e => {
+  const bt = e.target.closest(".gostei"); if (!bt) return;
+  const x = chaveDe(bt), k = lista.findIndex(y => y.chave === x.chave);
+  const msg = bt.parentElement.querySelector(".msg");
+  if (k >= 0) { lista.splice(k, 1); msg.textContent = ""; }
+  else { lista.push(x); msg.textContent = "Guardei! Continue olhando. No fim, toque em “Enviar o que gostei” lá embaixo."; }
+  guardar(); verTudo();
+});
+document.getElementById("lista-limpar").addEventListener("click", () => {
+  if (!confirm("Tirar todas as peças da sua lista?")) return;
+  lista = []; guardar(); verTudo(); document.querySelectorAll(".acoes .msg").forEach(m => m.textContent = "");
+});
+addEventListener("storage", e => { if (e.key === "gostei") { try { lista = JSON.parse(e.newValue || "[]"); } catch (err) {} verTudo(); } });
+
 desenhar();
+verTudo();
 
 // Setinha para voltar às categorias: aparece depois que a pessoa desce a tela.
 const subir = document.getElementById("subir");
@@ -430,6 +487,8 @@ function irPara(alvo){
   let n = 0; fixar = setInterval(() => { acertar(); if (++n > 40) clearInterval(fixar); }, 100);
 }
 ["touchstart", "wheel", "keydown"].forEach(ev => addEventListener(ev, e => { if (!e.target.closest?.('a[href^="#"], #subir')) clearInterval(fixar); }, {passive: true}));
+// Link com #peça (vindo da mensagem do WhatsApp): abre direto naquela peça.
+if (location.hash) irPara(document.getElementById(decodeURIComponent(location.hash.slice(1))));
 document.addEventListener("click", e => {
   const a = e.target.closest('a[href^="#"]'); if (!a) return;
   const alvo = document.getElementById(decodeURIComponent(a.getAttribute("href").slice(1)));
