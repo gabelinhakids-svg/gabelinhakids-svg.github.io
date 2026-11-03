@@ -482,7 +482,7 @@ document.getElementById("mandar").addEventListener("click", async e => {
     const blobs = await Promise.all(lista.filter(x => x.img).map(x => pegar(x.img)));
     const files = blobs.map((b, k) => new File([b], `gabelinha-${k + 1}.jpg`, {type: b.type || "image/jpeg"}));
     if (!files.length || !navigator.canShare({files})) throw new Error("sem-share");
-    await navigator.share({files, text: textoLista()});
+    await navigator.share({files});
   } catch (err) {
     if (err && err.name === "AbortError") return;
     open(a.href, "_blank");
