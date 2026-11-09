@@ -221,7 +221,6 @@ body::before{background:var(--fundo)}
   <div class="marca">Gabelinha Kids · Atacado</div>
   <div class="titulo"><img class="boneca" src="midia/4f103287f37e8aac3c042be2a14f2d0a.png" alt="" width="64" height="64"><h1>Catálogo</h1></div>
   <div class="data" id="data">Atualizado hoje</div>
-  <div class="oferta20"><b>20% OFF</b><span>comprando a partir de 6 itens (sortidos)</span></div>
 </div></header>
 <div class="g" id="corpo"><div class="miolo">
   <div class="folha">
@@ -238,9 +237,8 @@ body::before{background:var(--fundo)}
       <a class="btn" href="https://wa.me/5551980640448?text=Oi!%20Vi%20o%20cat%C3%A1logo.%20Procuro%20(tipo%20de%20pe%C3%A7a)%3A%20%20%20Tamanho%3A%20" target="_blank" rel="noopener">💬 Consultar no privado</a>
     </div>
     <div class="fim20">
-      <div class="grande">20% OFF a partir de 6 peças</div>
+      <div class="grande">3x sem juros no cartão</div>
       <p>Podem ser peças sortidas, de modelos e categorias diferentes.</p>
-      <p>E ainda 3x sem juros no cartão.</p>
     </div>
     <div class="entrega">
       <div class="grande">Entrega</div>
@@ -356,7 +354,7 @@ function desenhar(){
     (editando ? `<div class="ed ed-grupo" data-grupo="${DADOS.grupos.indexOf(x.g)}"><label>Nome da categoria<input data-campo="grupo" value="${esc(x.g.nome)}"></label></div>` : "") +
     x.cats.map((c, n) => {
       const preco = c.preco == null ? `<div class="preco"><b>Consulte</b></div>`
-        : `<div class="preco"><b>${real(c.preco)}</b><span>${real(off(c.preco))} <i>20% OFF</i></span></div>`;
+        : `<div class="preco"><b>${real(c.preco)}</b></div>`;
       return (n ? `<div class="divisor" aria-hidden="true"></div>` : "") + `<article class="sub ${esc(c.cor)}" id="${esc(c.id)}">
         <div class="sub-cab"><h3>${inteiro(c.nome)}</h3><div class="linha"><span class="tag">${esc(tamTxt(c)).replace(" · ", "<br>")}</span>${preco}</div></div>
         ${editando ? editor(c) : ""}
@@ -596,7 +594,7 @@ vitrine.addEventListener("input", e => {
   const art = e.target.closest(".sub");
   art.querySelector("h3").textContent = c.nome;
   art.querySelector(".tag").textContent = tamTxt(c);
-  art.querySelector(".preco").innerHTML = c.preco == null ? "<b>Consulte</b>" : `<b>${real(c.preco)}</b><span>${real(off(c.preco))} <i>20% OFF</i></span>`;
+  art.querySelector(".preco").innerHTML = c.preco == null ? "<b>Consulte</b>" : `<b>${real(c.preco)}</b>`;
 });
 // Ao sair do campo, redesenha (reordena por preço, troca a cor) e volta para a mesma peça.
 vitrine.addEventListener("change", async e => {
