@@ -157,7 +157,7 @@ footer b{color:var(--tinta)}
 .sub-cab .linha{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .sub-cab .preco b{font-size:22px}
 .sub-cab .preco span{font-size:15px}
-.sub-cab .tag{margin-top:0;white-space:nowrap;line-height:1.3}
+.sub-cab .tag{margin-top:0;white-space:normal;line-height:1.3;min-width:0;overflow-wrap:anywhere;border-radius:14px!important}
 /* Títulos e botões das categorias: letra moderna e alta, diferente da das peças, em maiúsculas, brancos */
 .grupo>h2{font-family:"Bebas Neue",var(--f);font-weight:400;text-transform:uppercase;letter-spacing:.04em;font-size:40px;line-height:1;text-wrap:balance;color:#fff;display:flex;align-items:center;gap:12px}
 .grupo{--c:var(--rosa)} .grupo.azul{--c:var(--azul)} .grupo.amarelo{--c:var(--amarelo)}
@@ -356,7 +356,7 @@ function desenhar(){
       const preco = c.preco == null ? `<div class="preco"><b>Consulte</b></div>`
         : `<div class="preco"><b>${real(c.preco)}</b></div>`;
       return (n ? `<div class="divisor" aria-hidden="true"></div>` : "") + `<article class="sub ${esc(c.cor)}" id="${esc(c.id)}">
-        <div class="sub-cab"><h3>${inteiro(c.nome)}</h3><div class="linha"><span class="tag">${esc(tamTxt(c)).replace(" · ", "<br>")}</span>${preco}</div></div>
+        <div class="sub-cab"><h3>${inteiro(c.nome)}</h3><div class="linha"><span class="tag">${esc(tamTxt(c)).split(" · ").join("<br>")}</span>${preco}</div></div>
         ${editando ? editor(c) : ""}
         <div class="midia">${blocoFotos(c)}${blocoVideo(c)}</div>
         <a class="voltar" href="#chips">⬆ Ver outras categorias</a></article>`;
