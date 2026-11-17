@@ -220,6 +220,8 @@ body::before{background:var(--fundo)}
 .natal-em{font-size:.62em;white-space:nowrap;vertical-align:.08em}
 .titulo h1{font-size:clamp(38px,11.5vw,48px);white-space:nowrap}
 .passos{font-size:19px;line-height:1.5}.passos p{margin:0}.passos p+p{margin-top:6px}
+nav{display:flex!important;flex-wrap:nowrap;gap:8px;overflow-x:auto;margin:14px -16px 0;padding:2px 16px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+nav a{flex:none;min-height:0!important;padding:8px 14px!important;border-radius:999px!important;font-size:16px!important;white-space:nowrap;line-height:1.1}
 </style>
 <header class="topo g" id="topo"><div class="miolo">
   <div class="marca">Gabelinha Kids · Atacado</div>
@@ -345,7 +347,7 @@ function editor(c){
 
 function desenhar(){
   const lista = ordenados();
-  document.getElementById("chips").innerHTML = '<div class="passo">Toque na categoria ou role para baixo para ver tudo</div>' +
+  document.getElementById("chips").innerHTML =
     lista.filter(x => x.cats.length || editando).map(x => `<a href="#${slug(x.g.nome)}">${esc(x.g.nome)}</a>`).join("");
   // Cor da faixa do título: menina e menino juntos fica amarelo; senão a cor que mais aparece.
   const corGrupo = cats => {
