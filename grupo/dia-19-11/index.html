@@ -164,6 +164,8 @@ https://gabelinhakids.com.br</pre>
 const arquivos=new Map();
 const pegar=src=>{if(!arquivos.has(src))arquivos.set(src,fetch(src).then(r=>r.blob()));return arquivos.get(src)};
 const copiar=async t=>{try{await navigator.clipboard.writeText(t);return true}catch(e){return false}};
+const android=/Android/i.test(navigator.userAgent);
+window.addEventListener("load",()=>document.querySelectorAll("button.wa[data-foto]").forEach(b=>pegar(b.dataset.foto).catch(()=>{})));
 document.addEventListener("pointerdown",e=>{const b=e.target.closest("button.wa[data-foto]");if(b)pegar(b.dataset.foto).catch(()=>{})});
 document.addEventListener("click",async e=>{
  const b=e.target.closest("button");if(!b)return;
@@ -178,8 +180,9 @@ document.addEventListener("click",async e=>{
   const bl=await pegar(b.dataset.foto);
   const f=new File([bl],b.dataset.foto.replace(/^\d+-/,"gabelinha-"),{type:bl.type||"image/jpeg"});
   if(!(navigator.canShare&&navigator.canShare({files:[f]})))throw new Error("sem-share");
-  await navigator.share({files:[f],text:texto});
-  if(copiou)msg.textContent="Se a legenda não apareceu no WhatsApp, segure no campo de texto e cole: ela já está copiada.";
+  await navigator.share(android?{files:[f]}:{files:[f],text:texto});
+  if(android)msg.textContent=copiou?"A legenda já está copiada: no WhatsApp, segure no campo da legenda da foto e toque em Colar.":"Copie a legenda acima e cole no WhatsApp junto com a foto.";
+  else if(copiou)msg.textContent="Se a legenda não apareceu no WhatsApp, segure no campo de texto e cole: ela já está copiada.";
  }catch(err){
   if(err&&err.name==="AbortError")return;arquivos.delete(b.dataset.foto);
   msg.textContent="Este celular não abriu o menu de compartilhar. Use \"Baixar foto\" e cole a legenda"+(copiou?" (já está copiada).":".");
