@@ -34,6 +34,7 @@ header{position:sticky;top:0;z-index:20;background:var(--topo);-webkit-backdrop-
 .sel button{border:0;background:none;font:inherit;color:var(--txt);padding:6px}
 .sel .x{font-size:24px;line-height:1}
 .sel .n{font-size:18px;font-weight:600;flex:1}
+.sel .enc.carregando{opacity:.6}
 .sel .enc{background:var(--verde);color:#fff;border-radius:999px;padding:9px 16px;font-weight:600;font-size:15px}
 body.selecionando .barra,body.selecionando .fixada,body.selecionando .chips{display:none}
 body.selecionando .sel{display:flex}
@@ -413,28 +414,60 @@ $("#fixada").addEventListener("click", e => e.currentTarget.classList.toggle("ab
 $("#topo").addEventListener("click", () => scrollTo({top: 0, behavior: "smooth"}));
 
 // Baixa a mídia como arquivo para encaminhar.
-async function arquivo(m, k){
-  const r = await fetch(m.dataset.src); const b = await r.blob();
-  const ext = m.dataset.tipo === "video" ? "mp4" : "jpg";
-  return new File([b], `gabelinha-kids-${k + 1}.${ext}`, {type: b.type || (ext === "mp4" ? "video/mp4" : "image/jpeg")});
+// As fotos/vídeos são baixados ANTES do toque em Encaminhar (o celular só abre o
+// "compartilhar" se for logo depois do toque). Assim vão como imagem/vídeo, nunca como texto.
+const cache = new Map();
+function pegar(m){
+  const src = m.dataset.src;
+  if (!cache.has(src)) {
+    const ext = m.dataset.tipo === "video" ? "mp4" : "jpg";
+    const nome = "gabelinha-kids-" + src.split("/").pop().slice(0, 8) + "." + ext;
+    const pr = fetch(src).then(r => r.blob()).then(b => { const f = new File([b], nome, {type: ext === "mp4" ? "video/mp4" : "image/jpeg"}); pr.f = f; return f; });
+    pr.catch(() => cache.delete(src));
+    cache.set(src, pr);
+  }
+  return cache.get(src);
 }
+const pronto = m => { const pr = cache.get(m.dataset.src); return pr && pr.f; };
 const textoDe = ms => ms.map(m => m.dataset.leg).filter((v, i, a) => a.indexOf(v) === i).join("\n\n");
 const linkDe = m => m.dataset.f ? `${SITE}/f/${m.dataset.f}.html` : SITE;
-async function copiar(t){ try { await navigator.clipboard.writeText(t); return true; } catch (e) { return false; } }
+function copiar(t){ try { navigator.clipboard.writeText(t).catch(() => {}); } catch (e) {} }
+const podeArquivo = !!(navigator.canShare && navigator.canShare({files: [new File(["x"], "x.jpg", {type: "image/jpeg"})]}));
 
-async function encaminhar(ms){
-  const texto = textoDe(ms);
-  try {
-    const files = await Promise.all(ms.map(arquivo));
-    if (!navigator.canShare || !navigator.canShare({files})) throw new Error("sem");
-    if (ANDROID) { if (await copiar(texto)) aviso("Legenda copiada: é só colar na conversa"); await navigator.share({files}); }
-    else await navigator.share({files, text: texto});
-    return true;
-  } catch (e) {
-    if (e && e.name === "AbortError") return false;
+// Fotos perto da tela já vão sendo preparadas.
+const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(x => {
+  if (x.isIntersecting && x.target.dataset.tipo === "foto") { pegar(x.target); io.unobserve(x.target); }
+}), {rootMargin: "600px 0px"}) : null;
+if (io && podeArquivo) document.querySelectorAll(".msg").forEach(m => io.observe(m));
+
+let botaoEnc = null;
+async function encaminhar(ms, botao){
+  if (!podeArquivo) {
     const t = ms.map(m => m.dataset.leg + "\n" + linkDe(m)).filter((v, i, a) => a.indexOf(v) === i).join("\n\n");
     open("https://wa.me/?text=" + encodeURIComponent(t), "_blank");
     return true;
+  }
+  ms.forEach(pegar);
+  if (!ms.every(pronto)) {
+    // Ainda baixando: espera e pede um toque de novo (sem mandar texto).
+    if (botao) botao.classList.add("carregando");
+    aviso("Preparando as fotos...");
+    try { await Promise.all(ms.map(pegar)); } catch (e) { aviso("Não consegui baixar. Tente de novo."); if (botao) botao.classList.remove("carregando"); return false; }
+    if (botao) botao.classList.remove("carregando");
+    aviso("Pronto! Toque de novo para encaminhar");
+    return false;
+  }
+  const files = ms.map(pronto);
+  const texto = textoDe(ms);
+  try {
+    if (ANDROID) { copiar(texto); await navigator.share({files}); }
+    else await navigator.share({files});
+    return true;
+  } catch (e) {
+    if (e && e.name === "AbortError") return false;
+    if (files.length > 1) aviso("Tente com menos fotos de cada vez");
+    else aviso("Toque de novo para encaminhar");
+    return false;
   }
 }
 
@@ -446,17 +479,18 @@ function atualizar(){
   if (!n) { selecionando = false; document.body.classList.remove("selecionando"); return; }
   $("#qtd").textContent = n;
 }
-function marcar(m){ m.classList.toggle("marcada"); atualizar(); }
-function iniciar(m){ selecionando = true; document.body.classList.add("selecionando"); m.classList.add("marcada"); atualizar(); if (navigator.vibrate) navigator.vibrate(30); }
+function marcar(m){ m.classList.toggle("marcada"); if (m.classList.contains("marcada") && podeArquivo) pegar(m); atualizar(); }
+function iniciar(m){ selecionando = true; document.body.classList.add("selecionando"); m.classList.add("marcada"); if (podeArquivo) pegar(m); atualizar(); if (navigator.vibrate) navigator.vibrate(30); }
 $("#cancelar").addEventListener("click", () => { marcadas().forEach(m => m.classList.remove("marcada")); atualizar(); });
 $("#encaminhar").addEventListener("click", async () => {
   const ms = marcadas(); if (!ms.length) return;
-  if (await encaminhar(ms)) { ms.forEach(m => m.classList.remove("marcada")); atualizar(); }
+  if (await encaminhar(ms, $("#encaminhar"))) { ms.forEach(m => m.classList.remove("marcada")); atualizar(); }
 });
 
 const chat = $("#chat");
 chat.addEventListener("pointerdown", e => {
-  const m = e.target.closest(".msg"); if (!m || e.target.closest(".fwd")) return;
+  const m = e.target.closest(".msg"); if (!m) return;
+  if (e.target.closest(".fwd")) { if (podeArquivo) pegar(m); return; }
   segurou = false; x0 = e.clientX; y0 = e.clientY;
   clearTimeout(timer);
   timer = setTimeout(() => { segurou = true; if (selecionando) marcar(m); else iniciar(m); }, 450);
