@@ -465,8 +465,7 @@ async function encaminhar(ms, botao){
   const files = ms.map(pronto);
   const texto = textoDe(ms);
   try {
-    if (ANDROID) { copiar(texto); await navigator.share({files}); }
-    else await navigator.share({files});
+    await navigator.share({files});  // vai sem legenda e sem valor (bom para quem revende)
     return true;
   } catch (e) {
     if (e && e.name === "AbortError") return false;
